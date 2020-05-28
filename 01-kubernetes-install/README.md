@@ -25,3 +25,5 @@ Copy created kube "config" file into the "$HOME/.kube/" folder to manage provisi
  ```
 $ cp ansible-playbooks/config ~/.kube/config
 ```
+
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/images/01-get-nodes.png?raw=true)
