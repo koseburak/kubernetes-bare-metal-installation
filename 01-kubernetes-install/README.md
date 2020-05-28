@@ -2,16 +2,14 @@
 
 install the kubernetes cluster using Ansible, Vagrant and Virtualbox
 
-## Installation
+## requiremenst to installation
 
 * [Docker](https://docs.docker.com/install/) - for install Docker Desktop
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads) - for install Virtualbox
 * [Vagrant](https://www.vagrantup.com/docs/installation/) - for install Vagrant
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) - for install kubectl client
 
-## Preparing environment
-
-Clone the git repository and install the K8s cluster
+## installation and configuration
 
 Run this command to clone the git repo of project
 ```
