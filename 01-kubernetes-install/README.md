@@ -29,5 +29,5 @@ $ cp ansible-playbooks/config ~/.kube/config
 run this command and see nodes of your kubernetes cluster like the below;
 ```
 $ kubectl get nodes -o wide
-![alt text](https://github.com/koseburak/kubernetes/feature/kubernetes-install/01-kubernetes-install/images/01-get-nodes.png?raw=true)
 ```
+![alt text](https://github.com/koseburak/kubernetes/feature/kubernetes-install/01-kubernetes-install/images/01-get-nodes.png?raw=true)
