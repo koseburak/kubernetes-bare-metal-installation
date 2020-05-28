@@ -1,0 +1,3 @@
+.vagrant
+01-kubernetes-install/ansible-playbooks/config
+01-kubernetes-install/ansible-playbooks/join-command
