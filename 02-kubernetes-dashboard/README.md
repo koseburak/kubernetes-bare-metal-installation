@@ -30,3 +30,8 @@ run this command and start the proxy tunnel to access dashboard web ui from loca
  ```
 $ kubectl proxy
 ```
+
+you can access your kubernetes dashboard with the below url address via your local browser
+```
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
