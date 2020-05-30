@@ -78,6 +78,18 @@
         - kubeadm=1.18.3-00
         - kubectl=1.18.3-00
 
+  - name: Set Node IP env
+    shell: | 
+      mkdir -p /var/lib/kubelet
+      echo "KUBELET_NODE_CONFIG=--node-ip={{ ansible_eth1.ipv4.address }}" >> /var/lib/kubelet/kubelet-node-config.env
+      exit 0
+    args:
+      executable: /bin/bash
+
+  - name: Copy custom kubeadm service config
+    become: false
+    command: sudo cp /tmp/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
   - name: Restart kubelet
     service:
       name: kubelet
@@ -85,7 +97,7 @@
       state: restarted
 
   - name: Initialize the Kubernetes cluster using kubeadm
-    command: kubeadm init --apiserver-advertise-address="192.168.50.100" --apiserver-cert-extra-sans="192.168.50.100"  --node-name master --pod-network-cidr=192.168.0.0/16
+    command: kubeadm init --apiserver-advertise-address="{{ ansible_eth1.ipv4.address }}" --apiserver-cert-extra-sans="{{ ansible_eth1.ipv4.address }}"  --node-name master --pod-network-cidr=172.16.0.0/16
 
   - name: Setup kubeconfig for vagrant user
     command: "{{ item }}"

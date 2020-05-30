@@ -14,7 +14,7 @@
       - curl
       - gnupg-agent
       - software-properties-common
-
+  
   - name: Add apt signing key for Docker
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
@@ -76,6 +76,18 @@
       packages:
         - kubelet=1.18.3-00
         - kubeadm=1.18.3-00
+
+  - name: Set Node IP env
+    shell: | 
+      mkdir -p /var/lib/kubelet
+      echo "KUBELET_NODE_CONFIG=--node-ip={{ ansible_eth1.ipv4.address }}" >> /var/lib/kubelet/kubelet-node-config.env
+      exit 0
+    args:
+      executable: /bin/bash
+
+  - name: Copy custom kubeadm service config
+    become: false
+    command: sudo cp /tmp/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
   - name: Restart kubelet
     service:

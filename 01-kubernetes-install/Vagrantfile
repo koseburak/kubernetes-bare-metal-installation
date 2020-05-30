@@ -9,9 +9,11 @@ Vagrant.configure("2") do |config|
         v.cpus = 2
     end
 
+    config.vm.provision "file", source: "ansible-playbooks/10-kubeadm.conf", destination: "/tmp/10-kubeadm.conf"
+
     config.vm.define "master" do |master|
         master.vm.box = IMAGE_NAME
-        master.vm.network "private_network", ip: "192.168.50.100"
+        master.vm.network "private_network", ip: "192.168.50.50"
         master.vm.hostname = "master"
         master.vm.provision "ansible_local" do |ansible|
             ansible.playbook = "ansible-playbooks/master-playbook.yml"
@@ -23,11 +25,11 @@ Vagrant.configure("2") do |config|
     (1..N).each do |i|
         config.vm.define "node-#{i}" do |node|
             node.vm.box = IMAGE_NAME
-            node.vm.network "private_network", ip: "192.168.50.#{i + 100}"
+            node.vm.network "private_network", ip: "192.168.50.#{i + 50}"
             node.vm.hostname = "node-#{i}"
             node.vm.provision "ansible_local" do |ansible|
                 ansible.playbook = "ansible-playbooks/node-playbook.yml"
-                ansible.extra_vars = { node_ip: "192.168.50.#{i + 100}", }
+                ansible.extra_vars = { node_ip: "192.168.50.#{i + 50}", }
             end
         end
     end
