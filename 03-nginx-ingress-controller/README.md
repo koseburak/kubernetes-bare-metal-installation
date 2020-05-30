@@ -82,3 +82,16 @@ If TLS is enabled for the Ingress, a Secret containing the certificate and key m
   type: kubernetes.io/tls
 
 ```
+
+add kubernetes node ip addresses in your local /etc/hosts file like the below;
+```
+192.168.50.50   example.com
+192.168.50.51   example.com
+```
+
+try to access http://example.com/ from browser and will see default backend response like the below;
+```
+default backend - 404
+```
+
+you can see and try an nginx example from [here](example#section)...
